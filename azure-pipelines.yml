@@ -15,12 +15,13 @@ jobs:
     inputs:
       versionSpec: '3.x'
   - script: |
-      docker build -t $(Build.Repository.Name):$(Build.BuildId) .
-      docker tag $(Build.Repository.Name):$(Build.BuildId) udodevprojectacr.azurecr.io/my-eshop:$(Build.BuildId)
-
       # Log in to Azure Container Registry with --password-stdin
-      echo "$(acrPassword)" | docker login udodevprojectacr.azurecr.io -u $(acrUsername) --password-stdin
+      echo "$(acrPassword)" | docker login udodevprojectacr.azurecr.io -u "$(acrUsername)" --password-stdin
 
+      # Build and tag the Docker image
+      docker build -t udodevprojectacr.azurecr.io/my-eshop:$(Build.BuildId) .
+
+      # Push the Docker image to Azure Container Registry
       docker push udodevprojectacr.azurecr.io/my-eshop:$(Build.BuildId)
     displayName: 'Build and Push'
 
