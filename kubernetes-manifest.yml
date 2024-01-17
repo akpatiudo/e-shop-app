@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: my-eshop-container
-        image: udodevprojectacr.azurecr.io/my-eshop:$(Build.BuildId)
+        image: mylab01acr.azurecr.io/my-eshop:$(Build.BuildId)
         ports:
         - containerPort: 5000
 
